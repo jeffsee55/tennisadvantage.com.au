@@ -1,5 +1,5 @@
 set :application, 'tennis_advantage'
-set :repo_url, 'git@github.com:jeffsee55/tennis_advantage.git'
+set :repo_url, 'git@github.com:jeffsee55/tennisadvantage.com.au.git'
 
 set :bundle_binstubs, nil
 set :deploy_to, '/home/deploy/tennis_advantage'
