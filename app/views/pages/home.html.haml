@@ -1,0 +1,40 @@
+=content_for :hero do
+  .hero
+    .overlay
+    .text
+      = @page.content_a.html_safe
+      .buttons
+        =button_to "About Us", about_path, method: :get, class: "btn-outline-white"
+        =button_to "Our Programs", programs_path, method: :get, class: "btn-outline-white"
+        =button_to "Shop", products_path, method: :get, class: "btn-outline-white"
+    .hero-slider
+      .product-slider
+        %a.prev{ href: "javascript:void(0)" }
+          =fa_icon "chevron-left 2x"
+        %a.next{ href: "javascript:void(0)" }
+          =fa_icon "chevron-right 2x"
+        %ul
+          -@slide_images.each do |slide_image|
+            %li{style: "background: url( #{ attachment_url slide_image, :image, :fill, 1100, 500 } ), no-repeat center; background-size: cover"}
+.flex-boxes
+  .flex-box.flex-box-big{:href => "javascript:void(0)"}
+    -#%i.fa.fa-trash.fa-3x
+    %h3= @post.title.upcase
+    =truncate @post.body.html_safe, length: 300
+    =link_to "Read More", @post
+  -if @page.content_b?
+    .flex-box{:href => "javascript:void(0)"}
+      -#%i.fa.fa-trash.fa-3x
+      =@page.content_b.html_safe
+  -if @page.content_c?
+    .flex-box{:href => "javascript:void(0)"}
+      =@page.content_c.html_safe
+  -if @page.content_d?
+    .flex-box{:href => "javascript:void(0)"}
+      =@page.content_d.html_safe
+  -if @page.content_e?
+    .flex-box.flex-box-big{:href => "javascript:void(0)"}
+      =@page.content_e.html_safe
+  -if @page.content_f?
+    .flex-box{:href => "javascript:void(0)"}
+      =@page.content_f.html_safe

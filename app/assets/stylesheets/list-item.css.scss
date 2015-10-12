@@ -1,0 +1,89 @@
+table.list-table {
+  tr {
+    padding-bottom: 10px;
+
+    & > td {
+      background: $light-gray;
+    }
+  }
+
+  td {
+    padding: 1em;
+  }
+
+  .icon {
+    display: none;
+    padding-right: 1em;
+    width: 10%;
+
+    @include media($medium-screen) {
+      display: table-cell;
+    }
+
+    & > div {
+      margin: auto;
+    }
+    .sprite {
+      @include display(flex);
+      @include align-items(center);
+      @include justify-content(center);
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      text-align: center;
+    }
+
+    .img {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+    }
+  }
+
+  .primary {
+    width: 20%;
+  }
+
+  .secondary {
+    text-align: right;
+    width: 40%;
+
+    a {
+      display: block;
+    }
+  }
+
+  .details {
+    text-align: right;
+    width: 20%;
+  }
+}
+
+.programs-index {
+
+  .primary {
+    width: 30%;
+  }
+
+  td.secondary {
+    text-align: left;
+    padding: 1em 2em;
+    width: 50%;
+  }
+
+  .details {
+    display: none;
+  }
+}
+
+table.list-table.summary-item {
+  tr {
+    background: $green;
+    color: white;
+
+    a {
+      color: white;
+    }
+  }
+}
+

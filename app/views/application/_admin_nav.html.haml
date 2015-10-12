@@ -1,0 +1,35 @@
+.container
+  .nav
+    .nav-menu
+      %ul
+        %li
+          %strong
+            =link_to "DASHBOARD", dashboard_path
+        %li
+          %strong
+            =link_to "ORDERS", admin_orders_path
+        %li
+          %strong
+            =link_to "PRODUCTS", admin_products_path
+        %li
+          %strong
+            =link_to "PROGRAMS", admin_programs_path
+        %li
+          %strong
+            =link_to "COACHES", admin_coaches_path
+        %li
+          %strong
+            =link_to "POSTS", admin_posts_path
+        %li
+          %strong
+            =link_to "PAGES", admin_pages_path
+        %li
+          %strong
+            =link_to "MESSAGES", admin_messages_path
+        %li
+          =link_to current_user.email, admin_user_path(current_user)
+          =button_to "SIGN OUT", sign_out_path, class: "btn-outline-green", method: :delete
+      #mobile-menu-close
+        %i.fa.fa-close.fa-2x
+    #mobile-menu-open
+      %i.fa.fa-bars.fa-2x

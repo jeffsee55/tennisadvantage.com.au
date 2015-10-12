@@ -1,0 +1,102 @@
+.nav {
+  @include display(flex);
+  @include justify-content(space-between);
+  top: 0; right: 0; left: 0;
+  z-index: 20;
+
+  .nav-logo {
+    width: 1px;
+    height:1px;
+
+    svg {
+      width: 50px;
+      right: 0;
+      position: relative;
+      z-index: 100;
+      @include media($medium-screen) {
+        width: 100px;
+      }
+
+      #green * {
+        fill: darken($green, 15);
+      }
+    }
+  }
+
+  #mobile-menu-open, #mobile-menu-close{
+    display: block;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    z-index: 50;
+    color: $green;
+
+    @include media($medium-screen) {
+      display: none;
+    }
+  }
+
+  .nav-menu {
+    display: none;
+
+    @include align-items(center);
+    @include justify-content(center);
+    position: fixed;
+    top: 0; right: 0; left: 0; bottom: 0;
+    background: transparentize($blue, 0.1);
+    z-index: 100;
+
+    @include media($medium-screen) {
+      @include display(flex);
+      @include justify-content(flex-end);
+      position: relative;
+      background: none;
+    }
+
+    ul {
+      float: none;
+
+      @include media($medium-screen) {
+        @include display(flex);
+        float: right;
+      }
+    }
+
+    ul li {
+      padding: 0em 1em;
+      font-size: 2em;
+      text-align: center;
+      float: none;
+
+      @include media($medium-screen) {
+        @include align-self(center);
+        padding: 2em 1em;
+        font-size: 1em;
+        float: left;
+        text-align: right;
+      }
+
+      input {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.pages-home .nav {
+  position: absolute;
+  color: white;
+  a {
+    color: white;
+    font-weight: bold;
+
+    &:hover {
+      color: darken(white, 10);
+    }
+  }
+}
+
+div.nav-menu.display-flex {
+  @include display(flex);
+}
+

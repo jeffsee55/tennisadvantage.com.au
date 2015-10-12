@@ -1,0 +1,23 @@
+.container.clear-nav
+  =button_to "All Users", admin_users_path, method: :get, class: "right"
+  =simple_form_for [:admin, @user] do |f|
+    %ul.accordion-tabs
+      %li.tab-header-and-content
+        %a.is-active.tab-link{:href => "javascript:void(0)"}
+          %h2 Summary
+        .tab-content
+          - if @user.errors.any?
+            #error_explanation
+              %h2
+                = pluralize(@user.errors.count, "error")
+                prohibited this task from being saved:
+              %ul
+                - @user.errors.full_messages.each do |msg|
+                  %li= msg
+          =f.input :name
+          =f.input :email
+          =f.input :password
+    =f.submit "Save", class: "right"
+  -if @user.persisted?
+    =button_to "Delete", [:admin, @user], class: "btn-outline-white", method: :delete, data: { confirm: "Are you sure?" }
+

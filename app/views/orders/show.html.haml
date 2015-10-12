@@ -1,0 +1,7 @@
+=render partial: "partials/hero", locals: { page: @page }
+%h1 Summary
+%hr.thick
+%table.list-table.summary-item
+  =render partial: "partials/list_item",
+    locals: @order.to_public_local_list_item
+

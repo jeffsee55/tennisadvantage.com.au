@@ -1,0 +1,138 @@
+body {
+  background-color: white;
+  color: $medium-gray;
+}
+
+#flash {
+
+  & > div {
+    padding: 1em 2em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    color: white;
+  }
+
+  #flash_notice {
+    background: $green;
+  }
+
+  #flash_alert {
+    background: $red;
+  }
+}
+
+.clear-nav {
+  margin-top: 50px;
+}
+
+hr {
+  margin: 1em 0;
+}
+
+hr.dark {
+  border-color: $medium-gray;
+}
+
+hr.thick {
+  border-bottom: 4px solid;
+}
+
+input{
+  background: none;
+  box-shadow: none;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border-radius: 2px;
+  width: 100%;
+}
+
+input.check_boxes {
+  display: inline-block;
+  width: 20px;
+}
+
+input.btn-outline-green {
+  border: 1px solid $green;
+  background-color: transparent;
+  color: $green;
+
+  &:hover {
+    background-color: transparent;
+    color: darken($green, 15);
+  }
+}
+
+input.btn-outline-white {
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+
+  &:hover {
+    background-color: transparent;
+    color: darken(white, 15);
+  }
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.clear {
+  @include clearfix();
+}
+
+.container {
+  @include outer-container();
+  padding: 0 0.5em;
+  position: relative;
+
+  @include media($large-screen) {
+  }
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.success-bg {
+  background-color: $green;
+}
+
+.primary-bg {
+  background-color: $blue;
+}
+
+.warning-bg {
+  background-color: $yellow;
+}
+
+.danger-bg {
+  background-color: $red;
+}
+
+.orange-bg {
+  background-color: $orange;
+}
+
+[id^="content-"] {
+  rect {
+    cursor: pointer;
+    &:hover {
+      fill: $green;
+    }
+  }
+}
+
+
+body[class^="admin-"] {
+  padding-bottom: 4em;
+}
+
+

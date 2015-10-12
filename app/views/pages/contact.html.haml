@@ -1,0 +1,12 @@
+=render partial: "partials/hero", locals: { page: @page }
+.page-content
+  .center-form
+    =simple_form_for @message do |f|
+      =f.input :name, placeholder: "Name"
+      =f.input :email, placeholder: "Email"
+      =f.input :subject, input_html: { value: params[:subject] }
+      =f.input :body, placeholder: "Message"
+      =f.submit "Send Message"
+%hr.thick
+%h1 OUR PRODUCTS
+= render partial: "partials/products_list", locals: { products: @products }

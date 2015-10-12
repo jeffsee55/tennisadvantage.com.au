@@ -1,0 +1,30 @@
+%table.list-table
+  -order.line_items.each do |line_item|
+    =render partial: "partials/list_item", locals: line_item.to_local_list_item
+.order-summary
+  %ul.billing
+    %li.bold Billing Information
+    %li= order.name
+    %li
+      %i{ class: "fa fa-cc-#{order.card_brand.downcase}" }
+      ="#{order.card_last4}"
+  %ul.shipping
+    -if order.hand_deliver?
+      %li.bold Shipping Information
+      %li N/A
+    -else
+      %li.bold Shipping Information
+      %li= order.name
+      %li= "#{ order.street1 }, #{ order.street2 }"
+      %li= "#{ order.city }, #{ order.state} #{ order.zip }"
+  %table.totals
+    %tr
+      %td Sub Total
+      %td= humanized_money_with_symbol order.sub_total
+    %tr
+      %td Shipping
+      %td= humanized_money_with_symbol order.shipping_rate
+    %tr
+      %td.bold Total
+      %td.bold= humanized_money_with_symbol order.total
+

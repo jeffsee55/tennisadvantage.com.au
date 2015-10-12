@@ -1,0 +1,35 @@
+=render partial: "partials/hero", locals: { page: @page }
+.header
+  %h3 PAYMENT INFORMATION
+  =button_to "Edit cart", cart_path, method: :get, class: "right"
+  %hr.thick
+.center-form
+  %h6 Please enter your payment and shipping information below
+  =simple_form_for @order do |f|
+    -if params[:errors]
+      .payment-errors
+        =params[:errors]
+    =f.input :name, label: false, input_html: { value: "Test User" }
+    =f.input :email, label: false, input_html: { value: "user@example.com" }
+    =f.input :hand_deliver, as: :boolean, boolean_style: :inline, label: "I prefer to pick up or arrange delivery."
+    .shipping
+      .street
+        =f.input :street1, label: false, input_html: { value: "10 Grafton St" }
+        =f.input :street2, label: false, input_html: { value: "" }
+      .location
+        =f.input :city, label: false, input_html: { value: "Balmain" }
+        =f.input :state, label: false, input_html: { value: "NSW" }
+        =f.input :zip, label: false, input_html: { value: "2041" }
+        =f.input :country, as: :string, label: false, input_html: { value: "Australia" }
+    =text_field_tag :cc_num, "4242424242424242"
+    .card-details
+      =text_field_tag :cvc, "123"
+      =text_field_tag :exp_month, "12"
+      =text_field_tag :exp_year, "2016"
+    =f.submit "Continue", class: "right"
+:erb
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+:javascript
+  Stripe.setPublishableKey('pk_test_IEYyj5VagNH64xfmDOYvhbc9')
+
+

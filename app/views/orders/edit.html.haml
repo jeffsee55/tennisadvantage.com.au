@@ -1,0 +1,10 @@
+=render partial: "partials/hero", locals: { page: @page }
+%h3 CONFIRM ORDER
+%hr.thick
+%table.list-table
+  =render partial: "order_summary", locals: { order: @order }
+
+=simple_form_for @order do |f|
+  =f.submit "Checkout", class: "right"
+=button_to "Back to cart", cart_path, class: "left btn-outline-green", method: :get
+
