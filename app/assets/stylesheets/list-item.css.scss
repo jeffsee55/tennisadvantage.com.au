@@ -75,15 +75,3 @@ table.list-table {
     display: none;
   }
 }
-
-table.list-table.summary-item {
-  tr {
-    background: $green;
-    color: white;
-
-    a {
-      color: white;
-    }
-  }
-}
-

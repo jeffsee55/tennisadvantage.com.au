@@ -9,35 +9,35 @@
         %h2 Summary
       .tab-content
         =render partial: "orders/order_summary", locals: { order: @order }
-    -unless @order.hand_deliver?
-      %li.tab-header-and-content
-        %a.tab-link{:href => "javascript:void(0)"}
-          %h2 Shipping
-        .tab-content
-          .clear
-            .half-column
-              %ul
-                %li
-                  %h3= @order.name
-                %li= mail_to @order.email, nil, target: '_newtab'
-                %h5 Shipping Information
+    %li.tab-header-and-content
+      %a.tab-link{:href => "javascript:void(0)"}
+        %h2 Manage 
+      .tab-content.manage-order
+        .clear
+          .half-column
+            %h3 Information
+            %hr.thick
+            %ul
+              %li
+                %h3= "Name: #{@order.name}"
+              %li
+              -if @order.hand_deliver?
+                Hand deliver, no shipping information provided
+              -else
                 %li= @order.name
                 %li= "#{ @order.street1 }, #{ @order.street2 }"
                 %li= "#{ @order.city }, #{ @order.state} #{ @order.zip }"
-            -#.half-column
-              -#%h3 Package Information
-              -#=simple_form_for [:admin, @order], url: recalculate_shipping_admin_order_path do |f|
-                -#=f.input :weight, label: false, placeholder: @order.weight
-                -#=f.input :height, placeholder: @order.height
-                -#=f.input :length, placeholder: @order.length
-                -#=f.input :width, placeholder: @order.width
-                -#=f.submit "Recalculate Shipping"
-            .half-column
-              %h3 Rate
-              %ul
-                %li=@order.delivery_method
-                %li="$#{ @order.shipping_rate }"
-                -if @order.current_state == "shipped"
-                  %strong Shipped
-                -else
-                  =button_to "Mark Shipped", ship_admin_order_path, method: :patch
+          .half-column
+            %h3 Actions
+            %hr.thick
+            %ul
+              %li
+                = mail_to @order.email, "Email: #{@order.email}", class: 'btn'
+              -if @order.current_state == "completed"
+                %li
+                  =link_to "Mark Inomplete", admin_order_path(@order, status: "incomplete"), class: 'btn', method: :patch
+              -else
+                %li
+                  =link_to "Mark Complete", admin_order_path(@order, status: "complete"), class: 'btn', method: :patch
+              %li
+                =button_to "Delete Order", admin_order_path, class: "btn warning", method: :delete, data: { confirm: "Are you sure?" }

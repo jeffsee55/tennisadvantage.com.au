@@ -33,13 +33,7 @@ Rails.application.routes.draw do
     resources :programs
     resources :users
     resources :coaches
-    resources :orders do
-      member do
-        patch "ship", to: "orders#ship", as: "ship"
-        post "deliver", to: "orders#deliver"
-        patch "recalculate_shipping", to: "orders#recalculate_shipping"
-      end
-    end
+    resources :orders
     resources :slide_images, only: [:index, :new, :create, :destroy]
     resources :messages, only: [:index, :show, :destroy]
   end

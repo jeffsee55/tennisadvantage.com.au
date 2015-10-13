@@ -9,3 +9,13 @@ div.shipping-option {
     width: 100%;
   }
 }
+
+.manage-order {
+  ul li {
+    margin-bottom: 1em;
+
+    input {
+      margin-bottom: 0;
+    }
+  }
+}

@@ -111,6 +111,11 @@
       min-height: 200px;
       display: inline-block;
       float: left;
+
+      img {
+        display: block;
+        margin: 0 auto;
+      }
     }
   }
 }

@@ -6,7 +6,7 @@ class SiteMailer < ActionMailer::Base
   end
 
   def new_message(message)
-    template_name = "tennis-new-message"
+    template_name = "tennis-advantage-new-message"
     template_content = []
     message = {
       to: [
@@ -33,10 +33,12 @@ class SiteMailer < ActionMailer::Base
       ],
       subject: "New Order",
       global_merge_vars: [
-        { name: "IMAGE", content: "https://s3-ap-southeast-2.amazonaws.com/tennis-advantage-assets/store/gregsons-tennis-banner-logo.png"},
         { name: "ORDER_NO", content: "Order no. ##{ order.id }"},
+        { name: "EMAIL", content: order.email },
+        { name: "NAME", content: order.name},
         { name: "DELIVERY_METHOD", content: order.delivery_method.upcase },
-        { name: "ORDER_ITEMS", content: order.line_items.map { |item| "#{item.product.name}, Options: #{item.variations}, Qty #{item.qty} (#{item.product.price})" }.join("<br>") },
+        { name: "DELIVERY_ADDRESS", content: order.address_to_string },
+        { name: "ORDER_ITEMS", content: order.line_items.map { |item| "#{item.product.name}, #{item.variations}, Qty #{item.qty} (#{item.product.price})" }.join("<br>") },
         { name: "ORDER_SHIPPING", content: order.shipping_rate },
         { name: "ORDER_TOTAL", content: order.total },
         { name: "ORDER_LINK", content: "http://staging.tennisadvantage.com.au/#{admin_order_path(order)}" }
@@ -51,17 +53,18 @@ class SiteMailer < ActionMailer::Base
     template_content = []
     message = {
       to: [
-        {email: "jeffsee.55@gmail.com"},
+        {email: order.email},
       ],
       subject: "Order Confirmation: Tennis Advantage",
       global_merge_vars: [
-        { name: "IMAGE", content: "https://s3-ap-southeast-2.amazonaws.com/tennis-advantage-assets/store/gregsons-tennis-banner-logo.png"},
+        { name: "NAME", content: order.name},
         { name: "ORDER_NO", content: "Order no. ##{ order.id }"},
         { name: "DELIVERY_METHOD", content: order.delivery_method.upcase },
         { name: "DELIVERY_INFO", content: order.delivery_info },
         { name: "ORDER_ITEMS", content: order.line_items.map { |item| "#{item.product.name}, Options: #{item.variations}, Qty #{item.qty} (#{item.product.price})" }.join("<br>") },
         { name: "ORDER_SHIPPING", content: order.shipping_rate },
-        { name: "ORDER_TOTAL", content: order.total }
+        { name: "ORDER_TOTAL", content: order.total },
+        { name: "ORDER_LINK", content: "http://staging.tennisadvantage.com.au/orders/#{order.id}.pdf" }
       ],
     }
 

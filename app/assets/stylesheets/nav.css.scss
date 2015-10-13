@@ -1,8 +1,12 @@
 .nav {
   @include display(flex);
   @include justify-content(space-between);
-  top: 0; right: 0; left: 0;
+  top: 0; right: 0; left: 1em;
   z-index: 20;
+
+  @include media($medium-screen) {
+    left: 0;
+  }
 
   .nav-logo {
     width: 1px;
@@ -70,7 +74,7 @@
 
       @include media($medium-screen) {
         @include align-self(center);
-        padding: 2em 1em;
+        padding: 1.9em 1em;
         font-size: 1em;
         float: left;
         text-align: right;

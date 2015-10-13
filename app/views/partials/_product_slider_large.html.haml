@@ -1,0 +1,20 @@
+.product-slider
+  %a.prev{ href: "javascript:void(0)" }
+    =fa_icon "chevron-left"
+  %a.next{ href: "javascript:void(0)" }
+    =fa_icon "chevron-right"
+  %ul
+    -if product.image_1_id?
+      %li
+        =image_tag attachment_url product, :image_1, :fill, 350, 350
+    -if product.image_2_id?
+      %li
+        =image_tag attachment_url product, :image_2, :fill, 350, 350
+    -if product.image_3_id?
+      %li
+        =image_tag attachment_url product, :image_3, :fill, 350, 350
+    -if product.image_4_id?
+      %li
+        =image_tag attachment_url product, :image_1, :fill, 350, 350
+
+

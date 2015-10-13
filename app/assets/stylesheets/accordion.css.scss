@@ -23,6 +23,8 @@
 
   .is-active {
     background: lighten($light-gray, 10);
+    border-top: 6px solid $green;
+    border-radius: 5px 5px 0 0;
   }
 
   .tab-content {

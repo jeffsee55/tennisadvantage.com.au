@@ -1,5 +1,5 @@
 class Admin::OrdersController < AdminController
-  before_action :set_order, only: [:show, :edit, :update, :ship]
+  before_action :set_order, only: [:show, :edit, :update, :ship, :destroy]
 
   def show
   end
@@ -12,25 +12,18 @@ class Admin::OrdersController < AdminController
   end
 
   def update
-    @order.update(order_params)
-    redirect_to admin_order_path(@order)
+    if params[:status] == "complete"
+      @order.complete
+      redirect_to admin_order_path(@order), notice: "Item has been marked completed"
+    else
+      @order.incomplete
+      redirect_to admin_order_path(@order), notice: "Item has been marked purchased but not yet complete"
+    end
   end
 
-  def ship
-    @order.ship
-    redirect_to admin_order_path(@order), notice: "Shipping label has been purchased"
-  end
-
-  def recalculate_shipping
-    @order = Order.find(params[:id])
-    @order.recalculate_shipping(order_params)
-    redirect_to :back
-  end
-
-  def deliver
-    @order = Order.find_by_shipment_id(params[:result][:shipment_id])
-    @order.deliver
-    render :success
+  def destroy
+    @order.delete
+    redirect_to admin_orders_path, notice: "Order has been deleted."
   end
 
   private
@@ -40,7 +33,7 @@ class Admin::OrdersController < AdminController
     end
 
     def order_params
-      params.require(:order).permit(:name, :street1, :street2, :city, :state, :zip, :weight, :height, :length, :width)
+      params.require(:order).permit(:name, :street1, :street2, :city, :state, :zip)
     end
 end
 

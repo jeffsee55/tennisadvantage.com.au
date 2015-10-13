@@ -38,8 +38,8 @@ class Order < ActiveRecord::Base
         ["Date", created_at.strftime("%B %d, %Y")],
         ["Email", "#{email}"],
         ["Delivery Method", delivery_method],
-        ["Card", "**** **** **** #{card.last4}"],
-        ["Total", "$#{(total).to_f}"]
+        ["Card", "**** **** **** #{card_last4}"],
+        ["Total", "$#{(total).to_s}"]
         #line_items.map(&:product).each do |product|
           #["Product", product.name]
         #end.join(',')
@@ -91,12 +91,12 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def ship
-    events.create! state: "shipped"
+  def complete
+    events.create! state: "completed"
   end
 
-  def deliver
-    events.create! state: "completed"
+  def incomplete
+    events.create! state: "purchased"
   end
 
   def shipping_rate
@@ -135,6 +135,10 @@ class Order < ActiveRecord::Base
     }
   end
 
+  def address_to_string
+    full_address.map { |k, v| v }.reject{|i| i.empty?}.join("<br>")
+  end
+
   def dimensions_and_weight
     {
       weight: self.weight,
@@ -150,9 +154,9 @@ class Order < ActiveRecord::Base
 
   def delivery_method
     if self.hand_deliver?
-      "Delivery method: Hand Deliver"
+      "Hand Deliver"
     else
-      "Delivery method: Shipment"
+      "Shipment"
     end
   end
 
@@ -196,15 +200,15 @@ class Order < ActiveRecord::Base
       primary: "Order ##{ self.id}",
       link: Rails.application.routes.url_helpers.admin_order_path(self),
       link_text: "View Order",
-      secondary: "Hello",
-      details: self.delivery_method
+      secondary: "Status: #{self.current_state.capitalize}",
+      details: "Delivery method: #{self.delivery_method}"
     }
   end
 
   def to_public_local_list_item
     {
       img: nil,
-      color: self.color,
+      color: current_state_color,
       icon: 'fa-check',
       primary: "Order ##{ self.id}",
       link: "javascript:void(0)",

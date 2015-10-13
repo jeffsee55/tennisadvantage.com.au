@@ -7,7 +7,6 @@ body {
 
   & > div {
     padding: 1em 2em;
-    position: absolute;
     top: 0;
     right: 0;
     left: 0;
@@ -135,4 +134,44 @@ body[class^="admin-"] {
   padding-bottom: 4em;
 }
 
+.btn {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  -webkit-font-smoothing: antialiased;
+  background-color: #9ed7c4;
+  border-radius: 3px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Lato" "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1em;
+  text-decoration: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  min-width: 150px;
+  max-width: 300px;
+  display: block;
+  text-align: center;
 
+  &:hover {
+    color: white;
+    background-color: #68c1a3;
+  }
+
+  &.warning {
+    background-color: $red;
+
+    &:hover {
+      color: white;
+      background-color: darken($red, 10);
+    }
+  }
+}
