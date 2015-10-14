@@ -32,8 +32,6 @@ class OrdersController < ApplicationController
     @order.save
     cart_session.add_order_id(@order.id)
     redirect_to edit_order_path(@order)
-  rescue => error
-    redirect_to new_order_path(errors: error)
   end
 
   def edit
