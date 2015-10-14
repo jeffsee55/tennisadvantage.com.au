@@ -1,8 +1,10 @@
 =render partial: "partials/hero", locals: { page: @page }
 .header
-  %h3 PAYMENT INFORMATION
-  =button_to "Edit cart", cart_path, method: :get, class: "right"
-  %hr.thick
+  .header-label
+    %h3 PAYMENT INFORMATION
+  .header-action
+    =button_to "Edit cart", cart_path, method: :get, class: "right btn-outline-green btn-center"
+%hr.thick
 .center-form
   %h6 Please enter your payment and shipping information below
   =simple_form_for @order do |f|
@@ -26,7 +28,7 @@
       =text_field_tag :cvc, "123"
       =text_field_tag :exp_month, "12"
       =text_field_tag :exp_year, "2016"
-    =f.submit "Continue", class: "right"
+    =f.submit "Continue", class: "right btn-center"
 :erb
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 :javascript

@@ -28,7 +28,7 @@ body {
 }
 
 hr {
-  margin: 1em 0;
+  margin: 0.75em 0;
 }
 
 hr.dark {
@@ -75,12 +75,27 @@ input.btn-outline-white {
   }
 }
 
+.right, .left {
+  margin-right: auto;
+  margin-left: auto;
+  display: block !important;
+  float: none;
+}
+
 .right {
-  float: right;
+  margin-bottom: 0;
+
+  @include media($medium-screen) {
+    float: right;
+  }
 }
 
 .left {
-  float: left;
+  margin-bottom: 0;
+
+  @include media($medium-screen) {
+    float: left;
+  }
 }
 
 .clear {
@@ -156,8 +171,7 @@ body[class^="admin-"] {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  min-width: 150px;
-  max-width: 300px;
+  min-width: 200px;
   display: block;
   text-align: center;
 
@@ -173,5 +187,13 @@ body[class^="admin-"] {
       color: white;
       background-color: darken($red, 10);
     }
+  }
+}
+
+.btn-center {
+  max-width: 100% !important;
+
+  @include media($medium-screen) {
+    max-width: 300px !important;
   }
 }

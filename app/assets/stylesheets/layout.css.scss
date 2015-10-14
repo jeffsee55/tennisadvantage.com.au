@@ -1,14 +1,32 @@
 .header {
+  @include media($medium-screen) {
+    @include display(flex);
+    @include align-items(baseline);
+    @include justify-content(space-between);
+  }
 
-  h1, h2, h3, h4, h5 {
-    float: left;
+  .header-label {
+    h1, h2, h3, h4, h5 {
+      text-align: center;
+    }
   }
-  button {
-    float: right;
+
+  .header-action {
+    @include omega();
+
+    input {
+      float: none;
+      display: block;
+
+      @include media($medium-screen) {
+        float: right;
+      }
+    }
   }
-  hr {
-    clear: both
-  }
+}
+
+hr {
+  clear: both
 }
 
 div.page-content {
