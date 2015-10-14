@@ -1,6 +1,6 @@
 class Admin::ProductsController < AdminController
   before_action :set_admin_product, only: [:show, :edit, :update, :destroy]
-  before_action :update_variants, only: [:create, :update]
+  before_action :update_variants, only: [:update]
 
   def index
     @products = Product.all.by_category.page params[:page]
@@ -21,8 +21,10 @@ class Admin::ProductsController < AdminController
     @product = Product.new(admin_product_params)
 
     if @product.save
-      admin_product_params[:variant_ids].map do |v|
-        ProductVariant.create(product_id: @product.id, variant_id: v.id)
+      if admin_product_params[:variant_ids]
+        admin_product_params[:variant_ids].reject{ |v| v.empty? }.map do |v|
+          ProductVariant.create(product_id: @product.id, variant_id: v.id)
+        end
       end
       redirect_to admin_product_path(@product), notice: 'Product was successfully created.'
     else
@@ -49,7 +51,7 @@ class Admin::ProductsController < AdminController
     end
 
     def admin_product_params
-      params.require(:product).permit(:name, :description, :price, :weight, :length, :category, :height, :width, :image_1, :image_2, :image_3, :image_4, variant_ids: [])
+      params.require(:product).permit(:name, :description, :price, :weight, :length, :category, :height, :width, :image_1, :image_2, :image_3, :image_4, :remove_image_1, :remove_image_2, :remove_image_3, :remove_image_4, variant_ids: [])
     end
 
     def update_variants

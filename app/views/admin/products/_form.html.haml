@@ -18,38 +18,72 @@
         %a.tab-link{:href => "javascript:void(0)"}
           %h2 Images
         .tab-content
-          .half-column
+          .product-card-column
             %ul.product-list
               =render partial: "partials/product_card", locals: { product: product }
-          .half-column
-            .inline-input
-              -if product.image_1_id?
-                #image_1_thumb.image_thumb{style: "background: url( #{ attachment_url product, :image_1, :fill, 75, 75 } ), no-repeat center; background-size: cover"}
-              -else
-                .image_thumb
-                  =fa_icon "upload"
-              =f.attachment_field :image_1, presigned: true
-            .inline-input
-              -if product.image_2_id?
-                #image_2_thumb.image_thumb{style: "background: url( #{ attachment_url product, :image_2, :fill, 75, 75 } ), no-repeat center; background-size: cover"}
-              -else
-                .image_thumb
-                  =fa_icon "upload"
-              =f.attachment_field :image_2, presigned: true
-            .inline-input
-              -if product.image_3_id?
-                #image_3_thumb.image_thumb{style: "background: url( #{ attachment_url product, :image_3, :fill, 75, 75 } ), no-repeat center; background-size: cover"}
-              -else
-                .image_thumb
-                  =fa_icon "upload"
-              =f.attachment_field :image_3, presigned: true
-            .inline-input
-              -if product.image_4_id?
-                #image_4_thumb.image_thumb{style: "background: url( #{ attachment_url product, :image_4, :fill, 75, 75 } ), no-repeat center; background-size: cover"}
-              -else
-                .image_thumb
-                  =fa_icon "upload"
-              =f.attachment_field :image_4, presigned: true
+          .product-table-column
+            %table
+              %tr
+                %th Image
+                %th Upload
+                -if product.has_images?
+                  %th Remove
+              %tr
+                %td
+                  -if product.image_1_id?
+                    #image_1_thumb.image_thumb{style: "background: url( #{ attachment_url product, :image_1, :fill, 75, 75 } ), no-repeat center; background-size: cover"}
+                  -else
+                    .image_thumb
+                      =fa_icon "upload"
+                %td
+                  =f.attachment_field :image_1, presigned: true
+                -if product.has_images?
+                  %td
+                    -if product.image_1_id?
+                      =f.input_field :remove_image_1, as: :boolean, boolean_style: :inline
+                      =f.label :remove_image_1
+              %tr
+                %td
+                  -if product.image_2_id?
+                    #image_2_thumb.image_thumb{style: "background: url( #{ attachment_url product, :image_2, :fill, 75, 75 } ), no-repeat center; background-size: cover"}
+                  -else
+                    .image_thumb
+                      =fa_icon "upload"
+                %td
+                  =f.attachment_field :image_2, presigned: true
+                -if product.has_images?
+                  %td
+                    -if product.image_2_id?
+                      =f.input_field :remove_image_2, as: :boolean, boolean_style: :inline
+                      =f.label :remove_image_2
+              %tr
+                %td
+                  -if product.image_3_id?
+                    #image_3_thumb.image_thumb{style: "background: url( #{ attachment_url product, :image_3, :fill, 75, 75 } ), no-repeat center; background-size: cover"}
+                  -else
+                    .image_thumb
+                      =fa_icon "upload"
+                %td
+                  =f.attachment_field :image_3, presigned: true
+                -if product.has_images?
+                  %td
+                    -if product.image_3_id?
+                      =f.input_field :remove_image_3, as: :boolean, boolean_style: :inline
+                      =f.label :remove_image_3
+              %tr
+                %td
+                  -if product.image_4_id?
+                    #image_1_thumb.image_thumb{style: "background: url( #{ attachment_url product, :image_4, :fill, 75, 75 } ), no-repeat center; background-size: cover"}
+                  -else
+                    .image_thumb
+                      =fa_icon "upload"
+                %td
+                  =f.attachment_field :image_4, presigned: true
+                -if product.has_images?
+                  %td
+                    -if product.image_4_id?
+                      =f.input_field :remove_image_4, as: :boolean, boolean_style: :inline
+                      =f.label :remove_image_4
     =f.submit "Save", class: "right"
   -if product.persisted?
     =button_to "Delete", [:admin, product], class: "btn-outline-green", method: :delete, data: { confirm: "Are you sure?" }

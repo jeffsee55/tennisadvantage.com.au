@@ -34,5 +34,9 @@ class Product < ActiveRecord::Base
   def image
     image_1
   end
+
+  def has_images?
+    true if(image_1_id? || image_2_id? || image_3_id? || image_4_id?)
+  end
 end
 
